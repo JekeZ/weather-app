@@ -5,9 +5,27 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align-last: center;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.painikkeet{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  
+}
+.painike1{
+  background-color: lightslategrey;
+}
+.painike2{
+  background-color: lightslategrey;
+}
+.painike3{
+  background-color: lightslategrey;
 }
