@@ -4,12 +4,16 @@ const API_KEY = 'dea80d3e63215c4cd527c0a5e045d382';
 
 const API_URL_PORI = `https://api.openweathermap.org/data/2.5/weather?q=Pori&appid=${API_KEY}&units=metric`;
 const API_URL_HELSINKI = `https://api.openweathermap.org/data/2.5/weather?q=Helsinki&appid=${API_KEY}&units=metric`;
-const API_URL_TAMPERE = `https://api.openweathermap.org/data/2.5/weather?q=Tampere&appid=${API_KEY}&units=metric`
+const API_URL_TAMPERE = `https://api.openweathermap.org/data/2.5/weather?q=Tampere&appid=${API_KEY}&units=metric`;
 
+//Luodaan komponentti WeatherPori ja annetaan sille parametriksi props, jotta voimme käyttää kyseisen komponentin arvoja myös muualla.
 export function WeatherPori(props) {
+    //Luodaan state nimeltä weather ja sille asetustila setWeather. Alkuarvona null.
     const [weather, setWeather] = useState(null);
+    //Luodaan toinen state nimeltä API_URL, ja sille asetustila setAPI_URL
     const [API_URL, setAPI_URL] = useState(API_URL_PORI)
     
+    //Luodaan funktiot, jotka vaihtavat API_URL tilaa, eri kaupunkien säätiloihin
     const handleClick = () => {
       setAPI_URL(API_URL_HELSINKI)
     }
@@ -19,6 +23,7 @@ export function WeatherPori(props) {
     const handleClick3 = () => {
       setAPI_URL(API_URL_TAMPERE)
     }
+    //Käytetään useEffect hookkia joka suoritetaan aina kujn API_URL muuttuu.
     useEffect(() => {
       axios.get(API_URL)
         .then(response => {
@@ -27,11 +32,11 @@ export function WeatherPori(props) {
     })
         .catch(error => console.log(error));
     }, [API_URL]);
-  
+    //Jos säätiloja ei jostain syystä saada, tulostetaan säätilojen tilalle "Loading.."
     if (!weather) {
       return <div>Loading...</div>;
     }
-  
+    
     const { name, main } = weather;
     const { temp, humidity } = main;
 
